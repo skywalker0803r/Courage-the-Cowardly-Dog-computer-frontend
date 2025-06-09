@@ -48,7 +48,14 @@ input.addEventListener("keydown", async function (e) {
 
       const data = await response.json();
       if (data.reply) {
-        typeWriter(`🖥️ ${data.reply}`);
+        typeWriter(`🖥️ ${data.reply}`, () => {
+          if (data.audio) {
+            // 將 base64 MP3 字串轉成 audio 播放
+            const audioSrc = `data:audio/mp3;base64,${data.audio}`;
+            const audio = new Audio(audioSrc);
+            audio.play();
+          }
+        });
       } else {
         log.innerText += "🖥️ Error: " + data.error + "\n\n";
       }
@@ -57,3 +64,4 @@ input.addEventListener("keydown", async function (e) {
     }
   }
 });
+
