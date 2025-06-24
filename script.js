@@ -37,13 +37,22 @@ input.addEventListener("keydown", async function (e) {
     input.value = "";
     input.style.setProperty('--caret-pos', 0);
 
+    const user_id = localStorage.getItem("user_id") || (() => {
+    const newId = "user_" + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem("user_id", newId);
+    return newId;
+  })();
+
     try {
       const response = await fetch("https://courage-the-cowardly-dog-computer-backend.onrender.com/ask", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({
+          message,
+          user_id  // 👈 加上這一行，讓後端記住你
+        }),
       });
 
       const data = await response.json();
