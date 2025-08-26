@@ -1,5 +1,6 @@
 const input = document.getElementById("input");
 const log = document.getElementById("log");
+const settingsButton = document.getElementById("settingsButton");
 
 // 動態輸出文字（打字機效果）
 function typeWriter(text, callback) {
@@ -73,4 +74,28 @@ input.addEventListener("keydown", async function (e) {
     }
   }
 });
+
+settingsButton.addEventListener("click", async () => {
+  const instruction = prompt("Enter new system instruction:");
+  if (instruction !== null) { // User didn't cancel
+    try {
+      const response = await fetch("https://courage-the-cowardly-dog-computer-backend.onrender.com/set_instruction", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ instruction }),
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        alert("System instruction updated successfully!");
+      } else {
+        alert("Failed to update system instruction: " + data.error);
+      }
+    } catch (error) {
+      alert("Network error while updating system instruction.");
+    }
+  }
+});
+
 

@@ -139,3 +139,45 @@ h1 {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
+
+/* Scrollbar Styling */
+#log::-webkit-scrollbar {
+  width: 8px;
+}
+
+#log::-webkit-scrollbar-track {
+  background: rgba(0, 50, 0, 0.1);
+  border-radius: 10px;
+}
+
+#log::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 10px;
+  border: 1px solid #008800;
+}
+
+#log::-webkit-scrollbar-thumb:hover {
+  background: #33ff33;
+}
+
+/* Settings Button */
+.settings-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-size: 1.5em;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00ff00;
+  transition: all 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.settings-button:hover {
+  background: #00ff00;
+  color: black;
+  box-shadow: 0 0 15px #00ff00;
+}
