@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.status === "success") {
           alert("System instruction updated successfully!");
           log.innerText = ""; // Clear conversation history
-          localStorage.removeItem("user_id"); // Clear user_id to start a new session
+          
         } else {
           alert("Failed to update system instruction: " + data.error);
         }
