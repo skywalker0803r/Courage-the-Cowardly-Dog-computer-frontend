@@ -79,13 +79,18 @@ document.addEventListener("DOMContentLoaded", () => {
   settingsButton.addEventListener("click", async () => {
     const instruction = prompt("Enter new system instruction:");
     if (instruction !== null) { // User didn't cancel
+      const user_id = localStorage.getItem("user_id") || (() => {
+        const newId = "user_" + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem("user_id", newId);
+        return newId;
+      })();
       try {
         const response = await fetch("https://courage-the-cowardly-dog-computer-backend.onrender.com/set_instruction", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ instruction }),
+          body: JSON.stringify({ instruction, user_id }),
         });
         const data = await response.json();
         if (data.status === "success") {
